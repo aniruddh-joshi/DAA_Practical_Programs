@@ -22,11 +22,16 @@ void heapify(int arr[],int n,int i,int&comparisons,int&swaps){
         comparisons++;
         swap(arr[i],arr[largest]);
         swaps++;
+        heapify(arr,n,largest,comparisons,swaps);
     }
-    heapify(arr,n,largest,comparisons,swaps);
 }
 
 void heap_sort(int arr[],int n,int &comparisons,int &swaps){
+    //Step 1 : To build the max heap using heapify
+    for(int i=n/2-1;i>=0;i--){
+        heapify(arr,n,i,comparisons,swaps);
+    }
+    //Step 2 : Delete from heap and keep heapifying it
     for(int i=n-1;i>=0;i--){
         swap(arr[0],arr[i]);
         swaps++;
